@@ -1,4 +1,4 @@
-#define SCAN_ITERATION_TIME 100
+#define SCAN_COLOR_DELAY 100
 
 bool isForbidden() {
   return false;
@@ -6,11 +6,11 @@ bool isForbidden() {
 
 bool scanColors() {
   r = scanR();
-  delay(SCAN_ITERATION_TIME);
+  delay(SCAN_COLOR_DELAY);
   g = scanG();
-  delay(SCAN_ITERATION_TIME);
+  delay(SCAN_COLOR_DELAY);
   b = scanB();
-  delay(SCAN_ITERATION_TIME);
+  delay(SCAN_COLOR_DELAY);
 
   return true;
 }
@@ -34,4 +34,12 @@ int scanB() {
   digitalWrite(cS3, HIGH);
   
   return pulseIn(cOut, LOW);
+}
+
+bool spotlightOn() {
+  return true;
+}
+
+bool spotlightOff() {
+  return true;
 }
