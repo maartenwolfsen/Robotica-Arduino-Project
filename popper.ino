@@ -1,3 +1,0 @@
-bool pop() {
-  return true;
-}
