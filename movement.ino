@@ -17,10 +17,22 @@ bool stopBoomMovement() {
 }
 
 /**
+ * Return Crane to Starting Position
+ */
+bool returnCrane() {
+  digitalWrite(craneBackward, LOW);
+  digitalWrite(craneForward, HIGH);
+  delay(10000);
+  digitalWrite(craneForward, LOW);
+  
+  return true;
+}
+
+/**
  * Start Horizontal Movement
  */
 bool startCraneMovement() {
-  digitalWrite(craneForward, HIGH);
+  digitalWrite(craneBackward, HIGH);
 
   return true;
 }
@@ -29,7 +41,7 @@ bool startCraneMovement() {
  * Stop Horizontal Movement
  */
 bool stopCraneMovement() {
-  digitalWrite(craneForward, LOW);
+  digitalWrite(craneBackward, LOW);
 
   return true;
 }

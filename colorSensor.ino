@@ -14,7 +14,7 @@ bool isForbidden() {
   Serial.print("B: ");
   Serial.println(b);
 
-  if (r > 1000 && g > 2000 && b > 2000) {
+  if (r > 300 && g > 1000 && b > 800) {
     Serial.println("Forbidden color detected!");
     return true;
   }

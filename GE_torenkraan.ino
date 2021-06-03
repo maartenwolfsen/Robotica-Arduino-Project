@@ -1,4 +1,4 @@
-//#include <Servo.h>
+#include <Servo.h>
 
 // Define pins
 #define dsEcho 12
@@ -15,12 +15,13 @@
 #define craneForward 25
 #define craneBackward 21
 
-//Servo servo;
+Servo servo;
 
 int timer = 0;
-int timerMax = 4600;
+int timerMax = 800;
 
 bool scanning = false;
+int d = 0;
 
 void setup() {
   // Distance Sensor
@@ -50,13 +51,17 @@ void setup() {
   servoReturn();
   
   Serial.begin(9600);
+
+  returnCrane();
 }
 
 void loop() {
-  Serial.print("Timer Left: ");
-  Serial.println(timerMax - timer);
+  //Serial.print("Timer Left: ");
+  //Serial.println(timerMax - timer);
+
+  d = getDistance();
   
-  if (getDistance() <= 15) {
+  if (d <= 15 && d > 4) {
     stopBoomMovement();
     spotlightOn();
     
@@ -76,8 +81,8 @@ void loop() {
    * Move Crane One Step
    */
   if (timer > timerMax) {
-    timer = 0;
     stopBoomMovement();
+    timer = 0;
     startCraneMovement();
     delay(1000);
     stopCraneMovement();

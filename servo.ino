@@ -1,27 +1,17 @@
-#define SERVO_POSITION_DELAY 10
-
-bool extended = false;
-
 /**
- * Return Servo to Safe State
+ * Extend Servo to Pop Balloon
  */
-bool servoReturn() {
-    //servo.write(180);
-
-  extended = false;
+bool servoExtend() {
+  servo.write(0);
   
   return true;
 }
 
 /**
- * Extend Servo to Pop Balloon
+ * Return Servo to Safe State
  */
-bool servoExtend() {
-  if (!extended) {
-    //servo.write(20);
-  }
-
-  extended = true;
-  
+bool servoReturn() {    
+  servo.write(180);
+    
   return true;
 }
