@@ -6,7 +6,7 @@ bool extended = false;
  * Return Servo to Safe State
  */
 bool servoReturn() {
-    servo.write(180);
+    //servo.write(180);
 
   extended = false;
   
@@ -18,7 +18,7 @@ bool servoReturn() {
  */
 bool servoExtend() {
   if (!extended) {
-    servo.write(0);
+    //servo.write(20);
   }
 
   extended = true;

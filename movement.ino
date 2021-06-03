@@ -20,7 +20,7 @@ bool stopBoomMovement() {
  * Start Horizontal Movement
  */
 bool startCraneMovement() {
-  digitalWrite(craneBackward, HIGH);
+  digitalWrite(craneForward, HIGH);
 
   return true;
 }
@@ -29,7 +29,7 @@ bool startCraneMovement() {
  * Stop Horizontal Movement
  */
 bool stopCraneMovement() {
-  digitalWrite(craneBackward, LOW);
+  digitalWrite(craneForward, LOW);
 
   return true;
 }

@@ -1,4 +1,4 @@
-#include <Servo.h>
+//#include <Servo.h>
 
 // Define pins
 #define dsEcho 12
@@ -15,7 +15,10 @@
 #define craneForward 25
 #define craneBackward 21
 
-Servo servo;
+//Servo servo;
+
+int timer = 0;
+int timerMax = 4600;
 
 bool scanning = false;
 
@@ -50,57 +53,33 @@ void setup() {
 }
 
 void loop() {
-  startCraneMovement();
-  delay(2000);
-  stopCraneMovement();
-  delay(2000);
-  /*if (getDistance() <= 15) {
-    digitalWrite(boomLeft, LOW);
+  Serial.print("Timer Left: ");
+  Serial.println(timerMax - timer);
+  
+  if (getDistance() <= 15) {
+    stopBoomMovement();
+    spotlightOn();
+    
     if (!isForbidden()) {
       servoExtend();
     } else {
       servoReturn();
     } 
   } else {
-    digitalWrite(boomLeft, HIGH);
+    spotlightOff();
     servoReturn();
-  }*/
-  
-  /*spotlightOn();
-  
-  if (!scanning) {
-    if (craneTimer >= craneTimerEnd) {
-      stopCraneMovement();
-      startBoomMovement();
-      boomTimer++;
+    startBoomMovement();
+    timer++;
+  }
 
-      if (boomTimer >= boomTimerEnd) {
-        stopBoomMovement();
-        boomtimer = 0;
-        craneTimer = 0;
-      }
-    } else {
-      startCraneMovement();
-      craneTimer++;
-    }
-
-    if (getDistance() <= 15) {
-      stopCraneMovement();
-      scanning = true;
-      
-      if (isForbidden()) {
-        scanning = false;
-      } else {
-        scanning = true;
-        servoExtend();
-        delay(100);
-        servoReturn();
-      }
-    }
-  } else {
-
-    if (isForbidden()) {
-      scanning = false;
-    }
-  }*/
+  /**
+   * Move Crane One Step
+   */
+  if (timer > timerMax) {
+    timer = 0;
+    stopBoomMovement();
+    startCraneMovement();
+    delay(1000);
+    stopCraneMovement();
+  }
 }
