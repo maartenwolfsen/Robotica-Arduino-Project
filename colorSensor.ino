@@ -2,6 +2,9 @@
 
 int r, g, b = 0;
 
+/**
+ * Check if Scanned Color is Forbidden
+ */
 bool isForbidden() {
   scanColors();
   Serial.print("R: ");
@@ -19,6 +22,9 @@ bool isForbidden() {
   return false;
 }
 
+/**
+ * Scan All Colors with Delay
+ */
 bool scanColors() {
   r = scanR();
   delay(SCAN_COLOR_DELAY);
@@ -30,6 +36,9 @@ bool scanColors() {
   return true;
 }
 
+/**
+ * Scan Red Color Frequency
+ */
 int scanR() {
   digitalWrite(cS2, LOW);
   digitalWrite(cS3, LOW);
@@ -37,6 +46,9 @@ int scanR() {
   return pulseIn(cOut, LOW);
 }
 
+/**
+ * Scan Green Color Frequency
+ */
 int scanG() {
   digitalWrite(cS2, HIGH);
   digitalWrite(cS3, HIGH);
@@ -44,21 +56,12 @@ int scanG() {
   return pulseIn(cOut, LOW);
 }
 
+/**
+ * Scan Blue Color Frequency
+ */
 int scanB() {
   digitalWrite(cS2, LOW);
   digitalWrite(cS3, HIGH);
   
   return pulseIn(cOut, LOW);
-}
-
-bool spotlightOn() {
-  digitalWrite(spotlight, HIGH);
-  
-  return true;
-}
-
-bool spotlightOff() {
-  digitalWrite(spotlight, LOW);
-  
-  return true;
 }

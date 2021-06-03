@@ -1,5 +1,6 @@
 #include <Servo.h>
 
+// Define pins
 #define dsEcho 12
 #define dsTrigger 11
 #define cS0 6
@@ -11,23 +12,19 @@
 #define spotlight 24
 #define boomLeft 22
 #define boomRight 23
-#define craneLeft 25
+#define craneForward 25
+#define craneBackward 21
 
 Servo servo;
 
 bool scanning = false;
 
-int craneTimer = 0;
-int craneTimerEnd = 10000;
-int boomTimer = 0;
-int boomTimerEnd = 2000;
-
-int frequency = 0;
-
 void setup() {
+  // Distance Sensor
   pinMode(dsTrigger, OUTPUT);
   pinMode(dsEcho, INPUT);
 
+  // Color Sensor
   pinMode(cS0, OUTPUT);
   pinMode(cS1, OUTPUT);
   pinMode(cS2, OUTPUT);
@@ -39,31 +36,33 @@ void setup() {
   digitalWrite(cS0,HIGH);
   digitalWrite(cS1,LOW);
 
-  pinMode(craneLeft, OUTPUT);
+  // Crane Movement
+  pinMode(craneForward, OUTPUT);
+  pinMode(craneBackward, OUTPUT);
   pinMode(boomLeft, OUTPUT);
   pinMode(boomRight, OUTPUT);
 
+  // Servo
   servo.attach(sPin);
-
   servoReturn();
   
   Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(boomRight, LOW);
-  digitalWrite(boomLeft, HIGH);
-  delay(1000);
-  digitalWrite(boomLeft, LOW);
-  digitalWrite(boomRight, HIGH);
-  delay(1000);
+  startCraneMovement();
+  delay(2000);
+  stopCraneMovement();
+  delay(2000);
   /*if (getDistance() <= 15) {
+    digitalWrite(boomLeft, LOW);
     if (!isForbidden()) {
       servoExtend();
     } else {
       servoReturn();
     } 
   } else {
+    digitalWrite(boomLeft, HIGH);
     servoReturn();
   }*/
   
